@@ -1,30 +1,33 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 export async function POST(req: Request) {
-  const body = await req.json()
+  const { email, password } = await req.json();
 
-  const { email, password } = body
+  // mock validation
+  if (email === "admin@gmail.com" && password === "123456") {
 
-  if (email === 'admin@gmail.com' && password === '123456') {
+    const token = jwt.sign(
+      { email },
+      process.env.JWT_SECRET!,
+      { expiresIn: "1h" }
+    );
+
     const response = NextResponse.json({
-      success: true,
-      message: 'Login successful'
-    })
+      message: "Login successful"
+    });
 
-    response.cookies.set('auth_token', 'dummy_token', {
+    response.cookies.set("auth_token", token, {
       httpOnly: true,
-      path: '/',
-      maxAge: 60 * 60
-    })
-
-    return response
+      secure: process.env.ENV === "production",
+      path: "/",
+      sameSite: "lax"
+    });
+    return response;
   }
 
   return NextResponse.json(
-    {
-      success: false,
-      message: 'Invalid credentials'
-    },
+    { message: "Invalid credentials" },
     { status: 401 }
-  )
+  );
 }

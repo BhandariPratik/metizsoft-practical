@@ -27,10 +27,10 @@ export default function HomePage() {
         </Link>
 
         <Link
-          href="/profile"
+          href="/about"
           className="bg-purple-500 text-white px-4 py-2 rounded"
         >
-          Protected Profile
+          About-us
         </Link>
       </div>
     </div>

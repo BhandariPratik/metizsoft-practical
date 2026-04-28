@@ -23,13 +23,16 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: "include",
         body: JSON.stringify({ email, password })
       })
 
       const data = await res.json()
 
       if (data.success) {
-        router.push('/dashboard')
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 500);
       } else {
         setError(data.message)
       }
