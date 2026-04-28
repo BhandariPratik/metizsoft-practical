@@ -28,11 +28,11 @@ export default function LoginPage() {
       })
 
       const data = await res.json()
-
+      // console.log("Data----->",data)
       if (data.success) {
-        setTimeout(() => {
+        // setTimeout(() => {
           window.location.href = "/dashboard";
-        }, 500);
+        // }, 500);
       } else {
         setError(data.message)
       }
