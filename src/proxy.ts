@@ -6,17 +6,16 @@ export function proxy(req: NextRequest) {
 
   console.log("Proxy executed:", path, token);
 
-  const publicRoutes = ["/", "/login"];
+  const isProtectedRoute =
+    path.startsWith("/dashboard") || path.startsWith("/about");
 
-  const isPublicRoute = publicRoutes.includes(path);
-
-  const isProtectedRoute =path.startsWith("/dashboard") || path.startsWith("/about");
+  const isLoginRoute = path === "/login";
 
   if (isProtectedRoute && !token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  if (isPublicRoute && token) {
+  if (isLoginRoute && token) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
@@ -24,10 +23,5 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/login",
-    "/dashboard/:path*",
-    "/about/:path*"
-  ]
+  matcher: ["/", "/login", "/dashboard/:path*", "/about/:path*"],
 };

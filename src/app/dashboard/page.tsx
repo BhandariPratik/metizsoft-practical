@@ -70,7 +70,6 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Dashboard</h1>
 
@@ -86,7 +85,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Search + Sorting */}
         <div className="bg-white p-4 rounded shadow mb-6 flex gap-4 flex-wrap">
           <input
             type="text"
@@ -119,35 +117,24 @@ export default function DashboardPage() {
           </select>
         </div>
 
-        {/* Loader */}
         {loading && (
           <div className="text-center bg-white p-10 rounded shadow">
             Loading users...
           </div>
         )}
 
-        {/* Error
-        {error && (
-          <div className="bg-red-100 text-red-600 p-4 rounded">
-            {error}
-          </div>
-        )} */}
-
-        {/* No Data */}
         {!loading && users.length === 0 && (
           <div className="bg-white p-10 text-center rounded shadow">
             No users found
           </div>
         )}
 
-        {/* Table */}
         {!loading && users.length > 0 && (
           <div className="bg-white rounded shadow overflow-hidden">
             <DataTable data={users} columns={columns} />
           </div>
         )}
 
-        {/* Pagination */}
         {!loading && totalPages > 1 && (
           <div className="flex justify-center gap-4 mt-6">
             <button

@@ -13,7 +13,6 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-
     setLoading(true)
     setError('')
 
@@ -30,9 +29,7 @@ export default function LoginPage() {
       const data = await res.json()
       // console.log("Data----->",data)
       if (data.success) {
-        // setTimeout(() => {
-          window.location.href = "/dashboard";
-        // }, 500);
+        window.location.href = "/dashboard";
       } else {
         setError(data.message)
       }

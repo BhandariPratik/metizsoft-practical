@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 export async function POST(req: Request) {
   const { email, password } = await req.json();
 
-  // mock validation
+  //validation
   if (email === "admin@gmail.com" && password === "123456") {
 
     const token = jwt.sign(
