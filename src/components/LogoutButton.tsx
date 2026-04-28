@@ -10,7 +10,7 @@ export default function LogoutButton() {
       method: 'POST'
     })
 
-    router.replace('/login')
+    router.replace('/')
   }
 
   return (
